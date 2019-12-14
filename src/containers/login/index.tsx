@@ -11,7 +11,6 @@ import CustomizedSnackbars from '../../components/Notification';
 const Login = ({dispatch, state}:any) => {
     const [ register, setRegister ] = useState(false);
     const [ form, setForm ] = useState({username:'', password: '', name:'', lastname: ''});
-    console.log(state, form)
     return (
         <Container>
     <CustomizedSnackbars 
