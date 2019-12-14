@@ -6,12 +6,11 @@ import { createBrowserHistory } from "history";
 import { Router } from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga'
 
-import { reducers } from './joinReducers';
-
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import rootSagas from './joinSagas';
+import { reducers } from './joinReducers';
 
 const customHistory = createBrowserHistory();
 const rootReducer = combineReducers(reducers)

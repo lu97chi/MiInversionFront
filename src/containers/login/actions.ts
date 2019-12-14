@@ -7,7 +7,7 @@ type form = {
     lastname?: string
 }
 
-export function makeLogin(form:form ) {
+export function makeLogin(form:form) {
   const { username, password } = form;
     return {
       type: LOGIN_START_SAGAS,

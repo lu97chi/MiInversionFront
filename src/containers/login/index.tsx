@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, CircularProgress } from '@material-ui/core';
 
 import { LoginContainer, Container, HeaderContainer, LogoContainer } from './styled';
 import { connect } from 'react-redux';
 import { makeLogin, closeNotification, makeRegister } from './actions';
-import { formatFormData } from './helpers';
+import { formatFormData, nameValidator } from './helpers';
 import CustomizedSnackbars from '../../components/Notification';
 
 
 const Login = ({dispatch, state}:any) => {
     const [ register, setRegister ] = useState(false);
-    const [ form, setForm ] = useState();
+    const [ form, setForm ] = useState({username:'', password: '', name:'', lastname: ''});
     console.log(state, form)
     return (
         <Container>
@@ -32,9 +32,11 @@ const Login = ({dispatch, state}:any) => {
             <LogoContainer>RÑ</LogoContainer>
             {register ? <> 
                 <TextField
+                    error={!nameValidator.test(form.name)}
                     onChange={(e) => formatFormData('name', form, setForm, e.target.value)} 
                     style={{marginBottom: '20px'}} label="Nombre" variant="outlined" fullWidth />
                 <TextField 
+                    error={!nameValidator.test(form.lastname)}
                     onChange={(e) => formatFormData('lastname', form, setForm, e.target.value)} 
                     style={{marginBottom: '20px'}} label="Apellido" variant="outlined" fullWidth />
             </> : null
@@ -46,9 +48,10 @@ const Login = ({dispatch, state}:any) => {
                 onChange={(e) => formatFormData('password', form, setForm, e.target.value)} 
                 style={{marginBottom: '20px'}} label="Contraseña" variant="outlined" fullWidth />
             <Button
-                disabled={!form || !form.username || !form.password}
+                disabled={!form.username || !form.password}
                 onClick={() => dispatch(register ? makeRegister(form) : makeLogin(form))}
                 variant="contained" color="primary" size="large">Acceder</Button>
+        { state.loading ? <CircularProgress style={{marginTop: '12px'}} />: null }
         </HeaderContainer>
 </LoginContainer>
 </Container>
