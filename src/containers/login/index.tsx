@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { makeLogin, closeNotification, makeRegister } from './actions';
 import { formatFormData, nameValidator } from './helpers';
 import CustomizedSnackbars from '../../components/Notification';
-
+import Logo from '../../assets/Logo.png'
 
 const Login = ({dispatch, state}:any) => {
     const [ register, setRegister ] = useState(false);
@@ -28,7 +28,9 @@ const Login = ({dispatch, state}:any) => {
                     onClick={() => setRegister(true)}
                     >Registrarse</Button>
             </div>
-            <LogoContainer>RÑ</LogoContainer>
+            <LogoContainer>
+                <img src={Logo} width={'100%'} alt='MiInversion' />
+            </LogoContainer>
             {register ? <> 
                 <TextField
                     error={!nameValidator.test(form.name)}

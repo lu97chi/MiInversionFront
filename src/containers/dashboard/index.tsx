@@ -5,11 +5,11 @@ import AppsIcon from '@material-ui/icons/Apps';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { getListItems, getSection } from './helpers';
 import { InformationContainer, ImageContainer, MainContainer } from './styled';
-
+import ProfilePicture from '../../assets/Profile.png';
 
 const Dashboard = () => {
     const [ isDrawerOpen, setDrawerOpen ] = useState(false);
-    const [ activeSection, setActiveSection ] = useState('false');
+    const [ activeSection, setActiveSection ] = useState('Tablas');
     return (
         <div>
             <AppBar position="fixed">
@@ -30,7 +30,9 @@ const Dashboard = () => {
         <List>
           <InformationContainer>
             <Typography>Agente</Typography>
-            <ImageContainer>L</ImageContainer>
+            <ImageContainer>
+              <img width={'100%'} alt='Profile' src={ProfilePicture} />
+            </ImageContainer>
             <Typography>Luis Roberto</Typography>
             <Typography>Hernandez Robles</Typography>
           </InformationContainer>

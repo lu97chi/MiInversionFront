@@ -15,7 +15,6 @@ export const ImageContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: red;
 `;
 
 export const MainContainer = styled.div`

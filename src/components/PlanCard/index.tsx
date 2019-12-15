@@ -1,12 +1,11 @@
 import React from 'react';
-import { Card, CardHeader, Avatar, IconButton, CardContent, Typography, CardActions, Fade } from '@material-ui/core';
-import ShareIcon from '@material-ui/icons/Share';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import { Card, CardHeader, Avatar, IconButton, CardContent, Typography, CardActions } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { CardContainer } from './styled';
 
 type Props = {
+    id: string,
     owner: string,
     title: string,
     createdAt: string,
@@ -15,10 +14,12 @@ type Props = {
     rate: string,
     duration: number,
     isFeature: boolean,
-    delay: string
+    delay: string,
+    handleDelete: (id: string) => void,
+    handleEdit: (id: string) =>void,
 }
 
-const PlansCard = ({min, max, rate, duration, delay}: Props) => <CardContainer delay={delay}>
+const PlansCard = ({min, max, rate, duration, delay, handleDelete, handleEdit, id, title}: Props) => <CardContainer delay={delay}>
 <Card >
 <CardHeader
   avatar={
@@ -26,7 +27,7 @@ const PlansCard = ({min, max, rate, duration, delay}: Props) => <CardContainer d
       R
     </Avatar>
   }
-  title="Shrimp and Chorizo Paella"
+  title={title}
   subheader="September 14, 2016"
 />
 <CardContent>
@@ -43,11 +44,11 @@ const PlansCard = ({min, max, rate, duration, delay}: Props) => <CardContainer d
     Duracion del plan(meses) : {duration}
   </Typography>
 </CardContent>
-<CardActions disableSpacing>
-  <IconButton aria-label="Edit">
+<CardActions disableSpacing >
+  <IconButton aria-label="Edit" onClick={() => handleEdit(id)}>
     <EditIcon />
   </IconButton>
-  <IconButton aria-label="Delete">
+  <IconButton aria-label="Delete" onClick={() => handleDelete(id)}>
     <DeleteIcon />
   </IconButton>
 </CardActions>
