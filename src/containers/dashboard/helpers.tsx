@@ -25,13 +25,13 @@ export const getListItems = (dataItems:any, drawer:any, activeSection:any) => {
     return Items;
 }
 
-export const getSection = (section:string) => {
+export const getSection = (section:string, dispatch: any, state: any) => {
     switch (section) {
         case 'Planes':
-            return <Plans />
+            return <Plans dispatch={dispatch} state={state} />
         case 'Tablas':
-            return <Efficiency />
+            return <Efficiency dispatch={dispatch} state={state} />
         default:
-            return <Plans />
+            return <Plans dispatch={dispatch} state={state} />
     }
 } 

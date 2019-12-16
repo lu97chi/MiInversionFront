@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardHeader, Avatar, IconButton, CardContent, Typography, CardActions } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import moment from 'moment';
 import { CardContainer } from './styled';
 
 type Props = {
@@ -15,11 +16,12 @@ type Props = {
     duration: number,
     isFeature: boolean,
     delay: string,
+    created_at: string,
     handleDelete: (id: string) => void,
     handleEdit: (id: string) =>void,
 }
 
-const PlansCard = ({min, max, rate, duration, delay, handleDelete, handleEdit, id, title}: Props) => <CardContainer delay={delay}>
+const PlansCard = ({min, max, rate, duration, delay, handleDelete, handleEdit, id, title, created_at}: Props) => <CardContainer delay={delay}>
 <Card >
 <CardHeader
   avatar={
@@ -28,7 +30,7 @@ const PlansCard = ({min, max, rate, duration, delay, handleDelete, handleEdit, i
     </Avatar>
   }
   title={title}
-  subheader="September 14, 2016"
+  subheader={moment(created_at).format('LL')}
 />
 <CardContent>
   <Typography variant="body2" color="textSecondary" component="p">

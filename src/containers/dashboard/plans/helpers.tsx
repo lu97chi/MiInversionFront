@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import PlansCard from '../../../components/PlanCard';
 import { deletePlan, addPlan, editPlan } from './actions';
 
-type Plan = {
+export type Plan = {
     id: string,
     name: string,
     mininvest: string,
@@ -11,6 +11,7 @@ type Plan = {
     monthlyrate: string,
     duration: number,
     isinitialplan: boolean,
+    created_at: string
 }
 
 
@@ -28,9 +29,10 @@ const editHandler = (modal: any, setActivePlan: any, id: string, setIsEdit: any)
 
 export const drawPlans = (data:Array<Plan>, setModal:any, setActivePlan: any, setAddModal: any, setIsEdit: any) => {
     const Plans:any = [];
-    data.forEach(({name, id, maxinvest, mininvest, monthlyrate, isinitialplan, duration}, i) => Plans.push(
-    <Grid xs={12} md={3} sm={6} item key={id} style={{marginBottom: '24px'}}>
+    data.forEach(({name, id, maxinvest, mininvest, monthlyrate, isinitialplan, duration, created_at}, i) => Plans.push(
+    <Grid xs={12} md={3} sm={6} item key={id}>
         <PlansCard 
+            created_at={created_at}
             delay={`${i / 10}s`} 
             isFeature={false} 
             createdAt={'Today'} 

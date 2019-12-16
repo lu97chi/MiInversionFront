@@ -6,10 +6,11 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { getListItems, getSection } from './helpers';
 import { InformationContainer, ImageContainer, MainContainer } from './styled';
 import ProfilePicture from '../../assets/Profile.png';
+import { connect } from 'react-redux';
 
-const Dashboard = () => {
+const Dashboard = ({dispatch, state}: any) => {
     const [ isDrawerOpen, setDrawerOpen ] = useState(false);
-    const [ activeSection, setActiveSection ] = useState('Tablas');
+    const [ activeSection, setActiveSection ] = useState('Planes');
     return (
         <div>
             <AppBar position="fixed">
@@ -43,10 +44,23 @@ const Dashboard = () => {
         </List>
         </Drawer>
           <MainContainer>
-            {getSection(activeSection)}
+            {getSection(activeSection, dispatch, state)}
           </MainContainer>
         </div>
     )
 };
 
-export default Dashboard;
+const mapStateToProps = (state: any) => {
+  return {
+      state: state.PlanesReducer
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+      dispatch
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

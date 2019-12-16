@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
 import { Grid, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteModal from '../../../components/DeleteModal';
@@ -9,8 +8,6 @@ import CustomizedSnackbars from '../../../components/Notification';
 import PlanModal from '../../../components/PlanModal';
 
 
-// const addPlan = () => 
-
 const Plans = ({dispatch, state}:any) => {
     const [ modal, setModal ] = useState(false);
     const [ addModal, setAddModal ] = useState(false);
@@ -19,7 +16,7 @@ const Plans = ({dispatch, state}:any) => {
     useEffect(() => {
         dispatch(getPlans('1'))
     }, []);
-    return (<div style={{marginTop: '54px'}}>
+    return (<div>
         <CustomizedSnackbars
         message={state.notification.state} 
         variant={state.notification.variant} 
@@ -40,16 +37,5 @@ const Plans = ({dispatch, state}:any) => {
     </div>)
 }
 
-const mapStateToProps = (state: any) => {
-    return {
-        state: state.PlanesReducer
-    }
-}
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        dispatch
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Plans);
+export default Plans;
