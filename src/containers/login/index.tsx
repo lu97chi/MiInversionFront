@@ -8,11 +8,23 @@ import { formatFormData, nameValidator } from './helpers';
 import CustomizedSnackbars from '../../components/Notification';
 import Logo from '../../assets/Logo.png'
 
+const handleEnter = (keycode:number, register:boolean, history:any, form:any, dispatch:any) => {
+    if (keycode === 13) {
+        if (register) {
+            dispatch(makeRegister(form, history))
+        } else {
+            console.log('ye')
+            dispatch(makeLogin(form, history))
+        }
+    }
+}
+
 const Login = ({dispatch, state, history}:any) => {
     const [ register, setRegister ] = useState(false);
     const [ form, setForm ] = useState({username:'', password: '', name:'', lastname: ''});
     return (
-        <Container>
+        <Container tabIndex={1} 
+            onKeyDown={(e) => (form.username && form.password) ? handleEnter(e.keyCode, register, history, form, dispatch) : null}>
     <CustomizedSnackbars 
         message={state.feedBack.message} 
         variant={state.feedBack.success} 

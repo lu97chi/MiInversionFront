@@ -48,6 +48,10 @@ const PlanModal = ({open, handleClose, handleAcept, isEdit, initialForm}:Props) 
                 label={label}
                 type={id === 'name' ? 'text' : 'number'}
                 fullWidth
+                error={
+                    (id === 'mininvest' && form.mininvest > form.maxinvest) ||
+                    (id === 'maxinvest' && form.maxinvest < form.mininvest)
+                }
                 defaultValue={isEdit ? initialForm[id] : ''}
                 key={id}
                 InputProps={{
@@ -62,7 +66,12 @@ const PlanModal = ({open, handleClose, handleAcept, isEdit, initialForm}:Props) 
                 Cancelar
             </Button>
             <Button
-                disabled={(!form.duration || !form.maxinvest || !form.mininvest || !form.monthlyrate || !form.name) && !isEdit} 
+                disabled={(!form.duration || 
+                    !form.maxinvest || 
+                    !form.mininvest || 
+                    !form.monthlyrate || 
+                    !form.name || 
+                    form.mininvest > form.maxinvest || form.maxinvest < form.mininvest) && !isEdit} 
                 onClick={() => handleAcept(form)} color="primary">
                   Aceptar
             </Button>

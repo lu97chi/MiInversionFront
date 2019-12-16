@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './containers/login';
 import Dashboard from './containers/dashboard';
 import NotFound from './containers/notFound';
-import CustomizedSnackbars from './components/Notification';
+// import CustomizedSnackbars from './components/Notification';
 
 const App: React.FC = () => {
   return (

@@ -44,6 +44,8 @@ function* registerWorker(registerData:LoginType) {
     });
     if (success) {
         yield put({ type: REGISTER_SUCCESS, user : response.data,  message: response.message });
+        // yield localStorage.setItem('token', '1');
+        // yield localStorage.setItem('user', JSON.stringify(response.data));
         setTimeout(() => {
             registerData.history.push('/dashboard');
         }, 1000);

@@ -8,6 +8,7 @@ export function isDev(): boolean {
 
 export function apiRoute(controller:string) : string {
     const prefix = 'http://'
-    const domain = isDev() ? `${prefix}localhost:3000` : `${prefix}/otraruta`;
+    // const domain = isDev() ? 'https://inversion-7d099.firebaseapp.com/' : 'https://inversion-7d099.firebaseapp.com/';
+    const domain = isDev() ? `${prefix}localhost:3000` : `${prefix}localhost:3000`;
     return `${domain}/${controller}`
 }
