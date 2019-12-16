@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stepper, Step, StepLabel, Typography, MenuItem, Select, InputLabel, Grid, TextField, Button } from '@material-ui/core';
+import { Typography, MenuItem, Select, InputLabel, Grid, TextField, Button } from '@material-ui/core';
 import { EfficiencyContainer, CustomPaper } from './styled';
 import { monthlyRatePlan } from './helpers';
 import Table from '../../../components/Table';
@@ -66,14 +66,17 @@ const Efficiency = ({dispatch, state}:any) => {
         <Button style={{marginRight: '22px'}} onClick={() => setIsTable(true)} variant="contained" color="primary">Tabla</Button>
         <Button variant="contained" color="primary" onClick={() => setIsTable(false)}>Grafica</Button>
       </Grid> : null}
+      <Grid item xs={12}>
+        {actualCalc && isTable ? 
+          <Table actualCalc={actualCalc} />: null
+        }
+        {
+          actualCalc && !isTable ? <Charts data={actualCalc} /> : null
+        }
+      </Grid>
       </Grid>
       
-      {actualCalc && isTable ? 
-        <Table actualCalc={actualCalc} />: null
-      }
-      {
-        actualCalc && !isTable ? <Charts data={actualCalc} /> : null
-      }
+      
       </CustomPaper>
     </EfficiencyContainer>
   )

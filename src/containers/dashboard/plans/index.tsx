@@ -7,14 +7,21 @@ import { getPlans, closeNotification } from './actions';
 import CustomizedSnackbars from '../../../components/Notification';
 import PlanModal from '../../../components/PlanModal';
 
+const handleClose = (setModal:any, setActivePlan:any, setIsEdit:any) => {
+    setModal(false);
+    setActivePlan(-1);
+    setIsEdit(false);
+}
 
 const Plans = ({dispatch, state}:any) => {
     const [ modal, setModal ] = useState(false);
     const [ addModal, setAddModal ] = useState(false);
     const [ activePlan, setActivePlan ] = useState();
     const [ isEdit, setIsEdit ] = useState(false);
+    const user:any = localStorage.getItem('user');
+    const { id, username }:any = JSON.parse(user);
     useEffect(() => {
-        dispatch(getPlans('1'))
+        dispatch(getPlans(id))
     }, []);
     return (<div>
         <CustomizedSnackbars
@@ -28,10 +35,16 @@ const Plans = ({dispatch, state}:any) => {
             <AddIcon />
         </Fab>
         <DeleteModal handleAccept={() => handleAcept(activePlan, dispatch, setModal)} open={modal} handleClose={() => setModal(false)} />
-        <PlanModal initialForm={state.plans.find(({id}:any) => id === activePlan)} isEdit={isEdit} handleAcept={(form) => handleAddAcept(dispatch, form, setAddModal, '4', isEdit, activePlan)} handleClose={() => setAddModal(false)} open={addModal} />
+        {
+            addModal ? <PlanModal 
+            initialForm={state.plans.find(({id}:any) => id === activePlan)} 
+            isEdit={isEdit} 
+            handleAcept={(form) => handleAddAcept(dispatch, form, setAddModal, id, isEdit, activePlan)} 
+            handleClose={() => handleClose(setAddModal, setActivePlan, setIsEdit)} open={addModal} /> : null
+        }
         <Grid container spacing={4}>
         {
-            state.plans ? drawPlans(state.plans, setModal, setActivePlan, setAddModal, setIsEdit) : null
+            state.plans ? drawPlans(state.plans, setModal, setActivePlan, setAddModal, setIsEdit, username) : null
         }
         </Grid>
     </div>)

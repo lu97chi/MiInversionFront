@@ -7,23 +7,25 @@ type form = {
     lastname?: string
 }
 
-export function makeLogin(form:form) {
+export function makeLogin(form:form, history:any) {
   const { username, password } = form;
     return {
       type: LOGIN_START_SAGAS,
       username,
-      password
+      password,
+      history
     };
   }
 
-export function makeRegister(form:form ) {
+export function makeRegister(form:form, history:any ) {
   const { username, password, name, lastname } = form;
     return {
       type: REGISTER_START_SAGAS,
       username,
       password,
       name,
-      lastname
+      lastname,
+      history
     };
   }
   

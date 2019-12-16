@@ -6,8 +6,9 @@ const takeEvery: any = Eff.takeEvery;
 const put: any = Eff.put;
 
 
-function* plansWorker(agentId: string) {
-    const data = yield Axios.get(apiRoute('planes/usuario/4'));
+function* plansWorker({agentId}: {agentId: string}) {
+    console.log(agentId);
+    const data = yield Axios.get(apiRoute(`planes/usuario/${agentId}`));
     yield put({type:PLANS_SET_PLANS, response: data.data});
 }
 

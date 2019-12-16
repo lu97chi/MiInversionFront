@@ -27,16 +27,15 @@ const editHandler = (modal: any, setActivePlan: any, id: string, setIsEdit: any)
     modal(true);
 }
 
-export const drawPlans = (data:Array<Plan>, setModal:any, setActivePlan: any, setAddModal: any, setIsEdit: any) => {
+export const drawPlans = (data:Array<Plan>, setModal:any, setActivePlan: any, setAddModal: any, setIsEdit: any, username:string) => {
     const Plans:any = [];
     data.forEach(({name, id, maxinvest, mininvest, monthlyrate, isinitialplan, duration, created_at}, i) => Plans.push(
     <Grid xs={12} md={3} sm={6} item key={id}>
         <PlansCard 
             created_at={created_at}
             delay={`${i / 10}s`} 
-            isFeature={false} 
-            createdAt={'Today'} 
-            owner={'Luis'} 
+            isFeature={isinitialplan} 
+            owner={username} 
             title={name} 
             id={id}
             handleDelete={(id) => buttonHandler(setModal, setActivePlan, id)}

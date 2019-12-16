@@ -6,17 +6,23 @@ import Efficiency from './efficiency';
 type dataItem = {
     label: string
     Icon: any
+    exit?: boolean
 }
 
-const handleClick = (drawer: any, activeSection: any, item: string) => {
-    drawer(false);
-    activeSection(item)
+const handleClick = (drawer: any, activeSection: any, item: string, exit?: boolean, history?: any) => {
+    if (!exit) {
+        drawer(false);
+        activeSection(item)
+    } else {
+        localStorage.clear();
+        history.push('/');
+    }
 }
-export const getListItems = (dataItems:any, drawer:any, activeSection:any) => {
+export const getListItems = (dataItems:any, drawer:any, activeSection:any, history: any) => {
     const Items:any = [];
-    dataItems.forEach(({label, Icon}:dataItem) => {
+    dataItems.forEach(({label, Icon, exit}:dataItem) => {
         Items.push(
-            <ListItem button key={label} onClick={() => handleClick(drawer, activeSection, label)}>
+            <ListItem button key={label} onClick={() => handleClick(drawer, activeSection, label, exit, history)}>
               <ListItemIcon><Icon /></ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>

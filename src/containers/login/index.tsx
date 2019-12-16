@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, TextField, CircularProgress } from '@material-ui/core';
-
+import { withRouter } from 'react-router-dom';
 import { LoginContainer, Container, HeaderContainer, LogoContainer } from './styled';
 import { connect } from 'react-redux';
 import { makeLogin, closeNotification, makeRegister } from './actions';
@@ -8,7 +8,7 @@ import { formatFormData, nameValidator } from './helpers';
 import CustomizedSnackbars from '../../components/Notification';
 import Logo from '../../assets/Logo.png'
 
-const Login = ({dispatch, state}:any) => {
+const Login = ({dispatch, state, history}:any) => {
     const [ register, setRegister ] = useState(false);
     const [ form, setForm ] = useState({username:'', password: '', name:'', lastname: ''});
     return (
@@ -46,11 +46,12 @@ const Login = ({dispatch, state}:any) => {
                 onChange={(e) => formatFormData('username', form, setForm, e.target.value)} 
                 style={{marginBottom: '20px'}} label="Nombre de usuario" variant="outlined" fullWidth />
             <TextField 
+                type="password"
                 onChange={(e) => formatFormData('password', form, setForm, e.target.value)} 
                 style={{marginBottom: '20px'}} label="Contraseña" variant="outlined" fullWidth />
             <Button
                 disabled={!form.username || !form.password}
-                onClick={() => dispatch(register ? makeRegister(form) : makeLogin(form))}
+                onClick={() => dispatch(register ? makeRegister(form, history) : makeLogin(form, history))}
                 variant="contained" color="primary" size="large">Acceder</Button>
         { state.loading ? <CircularProgress style={{marginTop: '12px'}} />: null }
         </HeaderContainer>
@@ -72,4 +73,6 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+const componentRouter = withRouter(Login)
+
+export default connect(mapStateToProps, mapDispatchToProps)(componentRouter);

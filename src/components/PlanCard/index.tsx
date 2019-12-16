@@ -9,7 +9,6 @@ type Props = {
     id: string,
     owner: string,
     title: string,
-    createdAt: string,
     min: string,
     max: string,
     rate: string,
@@ -21,12 +20,12 @@ type Props = {
     handleEdit: (id: string) =>void,
 }
 
-const PlansCard = ({min, max, rate, duration, delay, handleDelete, handleEdit, id, title, created_at}: Props) => <CardContainer delay={delay}>
+const PlansCard = ({min, max, rate, duration, delay, handleDelete, handleEdit, id, title, created_at, owner, isFeature}: Props) => <CardContainer delay={delay}>
 <Card >
 <CardHeader
   avatar={
     <Avatar aria-label="recipe" >
-      R
+      {owner[0] || '?'}
     </Avatar>
   }
   title={title}
@@ -46,14 +45,17 @@ const PlansCard = ({min, max, rate, duration, delay, handleDelete, handleEdit, i
     Duracion del plan(meses) : {duration}
   </Typography>
 </CardContent>
-<CardActions disableSpacing >
-  <IconButton aria-label="Edit" onClick={() => handleEdit(id)}>
+<CardActions>
+  { !isFeature ?  <>
+    <IconButton aria-label="Edit" onClick={() => handleEdit(id)}>
     <EditIcon />
   </IconButton>
   <IconButton aria-label="Delete" onClick={() => handleDelete(id)}>
     <DeleteIcon />
   </IconButton>
+  </> : <Typography variant="subtitle1" color="primary">Plan Especial</Typography>}
 </CardActions>
+
 </Card>
 </CardContainer>
     
